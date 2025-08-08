@@ -258,6 +258,57 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+-- [[ File Template Autocmd ]]
+-- Create autocmd for file templates - insert content directly
+vim.api.nvim_create_autocmd('BufNewFile', {
+  pattern = {'*.py', '*.sh'},
+  callback = function(args)
+    local filename = vim.fn.expand('%:p')
+    local ext = vim.fn.expand('%:e')
+    
+    -- Only insert template for truly new files
+    if vim.fn.filereadable(filename) == 1 then
+      return
+    end
+    
+    vim.defer_fn(function()
+      local lines = {}
+      
+      if ext == 'py' then
+        lines = {
+          "#!/usr/bin/env python",
+          "# $Id$",
+          "# -*- coding: utf-8 -*-",
+          "",
+          "",
+          "",
+          "# vim:syntax=python",
+          "# vim:sw=4:softtabstop=4:expandtab",
+        }
+      elseif ext == 'sh' then
+        lines = {
+          "#!/usr/bin/env bash",
+          "# $Id$",
+          "",
+          "",
+          "",
+          "# vim:syntax=sh",
+          "# vim:sw=4:softtabstop=4:expandtab",
+        }
+      end
+      
+      if #lines > 0 then
+        -- Insert the template lines
+        vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
+        -- Position cursor after the empty lines in the middle
+        vim.api.nvim_win_set_cursor(0, {4, 0})
+        -- Enter insert mode
+        vim.cmd('startinsert')
+      end
+    end, 100)
+  end,
+})
+
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
@@ -848,23 +899,6 @@ require('lazy').setup({
         config = function()
           -- Load custom snippets for file templates
           require('luasnip.loaders.from_lua').load({paths = "./lua/snippets"})
-          
-          -- Auto-insert file templates on new files
-          vim.api.nvim_create_autocmd('BufNewFile', {
-            pattern = {'*.py', '*.sh'},
-            callback = function()
-              vim.defer_fn(function()
-                vim.cmd('startinsert')
-                vim.api.nvim_feedkeys('_template_', 'n', false)
-                vim.defer_fn(function()
-                  local ls = require('luasnip')
-                  if ls.expandable() then
-                    ls.expand()
-                  end
-                end, 50)
-              end, 100)
-            end,
-          })
         end,
       },
       'folke/lazydev.nvim',
