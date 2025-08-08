@@ -27,7 +27,7 @@
 - **Code formatting** with conform.nvim
 - **Auto-pairs** with TreeSitter integration
 - **Undo history** visualization with undotree
-- **File templates** with automatic shebangs and headers
+- **Automatic file templates** for Python, Shell, and Lua scripts
 - **TODO highlighting** and project-wide search
 
 ## 📁 **Project Structure**
@@ -35,36 +35,39 @@
 ```
 kickstart.nvim/
 ├── init.lua                          # Main configuration entry point
-├── lua/custom/
-│   ├── transparency.lua              # Transparency management module
-│   ├── config/
-│   │   └── keymaps.lua              # Centralized keymap definitions
-│   ├── utils/
-│   │   └── plugin-loader.lua        # Enhanced plugin loading system
-│   └── plugins/                      # Modular plugin organization
-│       ├── init.lua                 # Plugin loader entry point
-│       ├── lsp/                     # Language Server Protocol
-│       │   └── mason.lua           # LSP server installer
-│       ├── ui/                      # User Interface
-│       │   ├── colorscheme.lua     # Rose Pine theme
-│       │   ├── bufferline.lua      # Tab/buffer management
-│       │   ├── icons.lua           # File type icons
-│       │   ├── fidget.lua          # LSP progress indicator
-│       │   └── which-key.lua       # Keymap discovery
-│       ├── editor/                  # Editor Enhancements
-│       │   ├── telescope.lua       # Fuzzy finder
-│       │   ├── treesitter.lua      # Syntax highlighting
-│       │   ├── nvim-tree.lua       # File explorer
-│       │   ├── autopairs.lua       # Smart bracket pairing
-│       │   ├── mini.lua            # Mini.nvim modules
-│       │   └── guess-indent.lua    # Auto-detect indentation
-│       └── tools/                   # Development Tools
-│           ├── git.lua             # Git integration
-│           ├── gitsigns.lua        # Git signs in gutter
-│           ├── undotree.lua        # Undo history
-│           ├── todo-comments.lua   # TODO highlighting
-│           └── misc.lua            # Utility plugins
-├── lua/snippets/                     # LuaSnip file templates
+├── lua/
+│   ├── templates.lua                # File template definitions & logic
+│   ├── custom/                      # Custom configuration modules
+│   │   ├── transparency.lua         # Transparency management module
+│   │   ├── config/
+│   │   │   └── keymaps.lua         # Centralized keymap definitions
+│   │   ├── utils/
+│   │   │   └── plugin-loader.lua   # Enhanced plugin loading system
+│   │   └── plugins/                 # Modular plugin organization
+│   │       ├── init.lua            # Plugin loader entry point
+│   │       ├── lsp/                # Language Server Protocol
+│   │       │   └── mason.lua       # LSP server installer
+│   │       ├── ui/                 # User Interface
+│   │       │   ├── colorscheme.lua # Rose Pine theme
+│   │       │   ├── bufferline.lua  # Tab/buffer management
+│   │       │   ├── icons.lua       # File type icons
+│   │       │   ├── fidget.lua      # LSP progress indicator
+│   │       │   └── which-key.lua   # Keymap discovery
+│   │       ├── editor/             # Editor Enhancements
+│   │       │   ├── telescope.lua   # Fuzzy finder
+│   │       │   ├── treesitter.lua  # Syntax highlighting
+│   │       │   ├── nvim-tree.lua   # File explorer
+│   │       │   ├── autopairs.lua   # Smart bracket pairing
+│   │       │   ├── mini.lua        # Mini.nvim modules
+│   │       │   └── guess-indent.lua # Auto-detect indentation
+│   │       └── tools/              # Development Tools
+│   │           ├── git.lua         # Git integration
+│   │           ├── gitsigns.lua    # Git signs in gutter
+│   │           ├── undotree.lua    # Undo history
+│   │           ├── todo-comments.lua # TODO highlighting
+│   │           └── misc.lua        # Utility plugins
+│   └── kickstart/                   # Original kickstart components
+│       └── plugins/                 # Additional kickstart plugins
 └── INSTALL.md                       # Configuration-specific setup
 ```
 
@@ -148,23 +151,38 @@ Edit `lua/custom/config/keymaps.lua` to modify LSP and shared keymaps, or edit i
 
 ### Adding File Templates
 
-Create new LuaSnip templates in `lua/snippets/{filetype}.lua`:
+The template system uses a dedicated `lua/templates.lua` module for easy maintenance and extension.
+
+**Supported Templates:** Python (`.py`), Shell (`.sh`), Lua (`.lua`)
+
+**To add a new template:**
+
+1. Edit `lua/templates.lua` and add your template to the `M.templates` table:
 
 ```lua
-local ls = require("luasnip")
-local s = ls.snippet
-local i = ls.insert_node
-local t = ls.text_node
-
-return {
-  s("_template_", {
-    t({"#!/usr/bin/env {language}", ""}),
-    i(0),
-  }),
-}
+-- Example: Adding a JavaScript template
+javascript = {
+  "#!/usr/bin/env node",
+  "// $Id$",
+  "// File: {{ filename }}",
+  "",
+  "",
+  "",
+  "// vim:syntax=javascript",
+  "// vim:sw=2:softtabstop=2:expandtab",
+},
 ```
 
-Templates automatically load when creating new files with matching extensions.
+2. **That's it!** The template system automatically:
+   - Detects the new template
+   - Generates autocmd patterns (`*.js` in this example)
+   - Inserts templates when creating new files
+
+**Template Features:**
+- ✅ **Automatic insertion** on `BufNewFile` for new files only
+- ✅ **Smart cursor positioning** at line 4 for immediate editing
+- ✅ **Insert mode activation** for seamless workflow
+- ✅ **Extensible design** - just add templates and they work!
 
 ### Changing Colorscheme
 

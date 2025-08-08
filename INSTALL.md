@@ -87,7 +87,7 @@ This configuration adds several enhancements to kickstart.nvim:
 - **Transparency management** with terminal background matching
 - **Modular plugin architecture** with categorical organization  
 - **Neovim 0.11+ modern APIs** for improved performance
-- **File templates** with automatic shebangs and headers for Python/shell scripts
+- **Automatic file templates** for Python, Shell, and Lua scripts with modular template system
 - **Enhanced keymaps** and centralized configuration
 
 See [README_CUSTOM.md](README_CUSTOM.md) for complete feature overview.
