@@ -27,7 +27,7 @@
 - **Code formatting** with conform.nvim
 - **Auto-pairs** with TreeSitter integration
 - **Undo history** visualization with undotree
-- **Template system** with templar.nvim
+- **File templates** with automatic shebangs and headers
 - **TODO highlighting** and project-wide search
 
 ## 📁 **Project Structure**
@@ -67,7 +67,7 @@ kickstart.nvim/
 │           ├── undotree.lua        # Undo history
 │           ├── todo-comments.lua   # TODO highlighting
 │           └── misc.lua            # Utility plugins
-├── templates/                        # Code templates
+├── lua/snippets/                     # LuaSnip file templates
 └── INSTALL.md                       # Configuration-specific setup
 ```
 
@@ -148,6 +148,26 @@ kickstart.nvim/
 ### Modifying Keymaps
 
 Edit `lua/custom/config/keymaps.lua` to modify LSP and shared keymaps, or edit individual plugin files for plugin-specific bindings.
+
+### Adding File Templates
+
+Create new LuaSnip templates in `lua/snippets/{filetype}.lua`:
+
+```lua
+local ls = require("luasnip")
+local s = ls.snippet
+local i = ls.insert_node
+local t = ls.text_node
+
+return {
+  s("_template_", {
+    t({"#!/usr/bin/env {language}", ""}),
+    i(0),
+  }),
+}
+```
+
+Templates automatically load when creating new files with matching extensions.
 
 ### Changing Colorscheme
 
