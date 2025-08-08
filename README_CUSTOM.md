@@ -68,7 +68,6 @@ kickstart.nvim/
 │           ├── todo-comments.lua   # TODO highlighting
 │           └── misc.lua            # Utility plugins
 ├── templates/                        # Code templates
-├── vimrc/                           # Legacy vim configurations
 └── INSTALL.md                       # Configuration-specific setup
 ```
 
