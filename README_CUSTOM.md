@@ -11,8 +11,8 @@
 - **Nerd Font icons** throughout the interface
 
 ### ⚡ **Development Powerhouse**
-- **Modern LSP setup** using Neovim 0.11+ APIs (`vim.lsp.config()`)
-- **Intelligent completion** with nvim-cmp and multiple sources
+- **Modern LSP setup** using Neovim 0.11+ APIs and Mason
+- **Intelligent completion** with blink.cmp and multiple sources
 - **Fast file navigation** with Telescope and fzf integration
 - **Advanced syntax highlighting** with TreeSitter text objects
 - **Git integration** with fugitive, gitsigns, and diff tools
@@ -44,9 +44,7 @@ kickstart.nvim/
 │   └── plugins/                      # Modular plugin organization
 │       ├── init.lua                 # Plugin loader entry point
 │       ├── lsp/                     # Language Server Protocol
-│       │   ├── mason.lua           # LSP server installer
-│       │   ├── servers.lua         # Server configurations
-│       │   └── completion.lua      # Autocompletion setup
+│       │   └── mason.lua           # LSP server installer
 │       ├── ui/                      # User Interface
 │       │   ├── colorscheme.lua     # Rose Pine theme
 │       │   ├── bufferline.lua      # Tab/buffer management
@@ -61,7 +59,6 @@ kickstart.nvim/
 │       │   ├── mini.lua            # Mini.nvim modules
 │       │   └── guess-indent.lua    # Auto-detect indentation
 │       └── tools/                   # Development Tools
-│           ├── formatting.lua      # Code formatting
 │           ├── git.lua             # Git integration
 │           ├── gitsigns.lua        # Git signs in gutter
 │           ├── undotree.lua        # Undo history
