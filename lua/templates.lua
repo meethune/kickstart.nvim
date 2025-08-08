@@ -24,15 +24,28 @@ M.templates = {
     "# vim:sw=4:softtabstop=4:expandtab",
   },
   
+  lua = {
+    "-- Lua script",
+    "-- $Id$",
+    "",
+    "",
+    "",
+    "-- vim:syntax=lua",
+    "-- vim:sw=2:softtabstop=2:expandtab",
+  },
+  
   -- Example: Add more templates as needed
-  -- lua = {
-  --   "-- Lua script",
-  --   "-- $Id$",
+  -- c = {
+  --   "#include <stdio.h>",
+  --   "/* $Id$ */",
   --   "",
+  --   "int main() {",
+  --   "    ",
+  --   "    return 0;",
+  --   "}",
   --   "",
-  --   "",
-  --   "-- vim:syntax=lua",
-  --   "-- vim:sw=2:softtabstop=2:expandtab",
+  --   "/* vim:syntax=c */",
+  --   "/* vim:sw=4:softtabstop=4:expandtab */",
   -- },
 }
 
