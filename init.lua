@@ -259,9 +259,11 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 -- [[ File Template Autocmd ]]
--- Create autocmd for file templates - insert content directly
+-- Create autocmd for file templates using external templates module
+local templates = require('templates')
+
 vim.api.nvim_create_autocmd('BufNewFile', {
-  pattern = {'*.py', '*.sh'},
+  pattern = templates.get_autocmd_patterns(),
   callback = function(args)
     local filename = vim.fn.expand('%:p')
     local ext = vim.fn.expand('%:e')
@@ -272,39 +274,7 @@ vim.api.nvim_create_autocmd('BufNewFile', {
     end
     
     vim.defer_fn(function()
-      local lines = {}
-      
-      if ext == 'py' then
-        lines = {
-          "#!/usr/bin/env python",
-          "# $Id$",
-          "# -*- coding: utf-8 -*-",
-          "",
-          "",
-          "",
-          "# vim:syntax=python",
-          "# vim:sw=4:softtabstop=4:expandtab",
-        }
-      elseif ext == 'sh' then
-        lines = {
-          "#!/usr/bin/env bash",
-          "# $Id$",
-          "",
-          "",
-          "",
-          "# vim:syntax=sh",
-          "# vim:sw=4:softtabstop=4:expandtab",
-        }
-      end
-      
-      if #lines > 0 then
-        -- Insert the template lines
-        vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
-        -- Position cursor after the empty lines in the middle
-        vim.api.nvim_win_set_cursor(0, {4, 0})
-        -- Enter insert mode
-        vim.cmd('startinsert')
-      end
+      templates.insert_template(ext)
     end, 100)
   end,
 })
