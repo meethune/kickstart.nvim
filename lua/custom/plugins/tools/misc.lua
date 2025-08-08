@@ -1,7 +1,5 @@
 -- Miscellaneous utility plugins
 return {
-  -- Template system
-  { 'vigoux/templar.nvim' },
   
   -- GnuPG file handling
   { 'jamessan/vim-gnupg' },

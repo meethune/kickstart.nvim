@@ -845,7 +845,27 @@ require('lazy').setup({
           --   end,
           -- },
         },
-        opts = {},
+        config = function()
+          -- Load custom snippets for file templates
+          require('luasnip.loaders.from_lua').load({paths = "./lua/snippets"})
+          
+          -- Auto-insert file templates on new files
+          vim.api.nvim_create_autocmd('BufNewFile', {
+            pattern = {'*.py', '*.sh'},
+            callback = function()
+              vim.defer_fn(function()
+                vim.cmd('startinsert')
+                vim.api.nvim_feedkeys('_template_', 'n', false)
+                vim.defer_fn(function()
+                  local ls = require('luasnip')
+                  if ls.expandable() then
+                    ls.expand()
+                  end
+                end, 50)
+              end, 100)
+            end,
+          })
+        end,
       },
       'folke/lazydev.nvim',
     },
