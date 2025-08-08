@@ -69,47 +69,14 @@ kickstart.nvim/
 │           └── misc.lua            # Utility plugins
 ├── templates/                        # Code templates
 ├── vimrc/                           # Legacy vim configurations
-└── docs/                            # Documentation
-    ├── INSTALL.md                   # Installation guide
-    ├── MIGRATION_SUMMARY.md         # Migration details
-    ├── MODULAR_ORGANIZATION.md      # Architecture overview
-    └── PLUGIN_FIXES.md              # Troubleshooting guide
+└── INSTALL.md                       # Configuration-specific setup
 ```
 
 ## 🚀 **Quick Start**
 
-### Prerequisites
-See [INSTALL.md](INSTALL.md) for detailed installation requirements.
+**Requirements:** Neovim 0.11.0+ and dependencies listed in [README.md](README.md).
 
-**Essential dependencies:**
-- Neovim 0.11.0+
-- Git, Make, Unzip, Curl
-- Ripgrep (rg)
-- C compiler (gcc/clang)
-- Nerd Font (for icons)
-
-### Installation
-
-1. **Backup existing config:**
-   ```bash
-   mv ~/.config/nvim ~/.config/nvim.backup
-   ```
-
-2. **Install this configuration:**
-   ```bash
-   git clone <your-repo> ~/.config/nvim
-   ```
-
-3. **Launch Neovim:**
-   ```bash
-   nvim
-   ```
-   Plugins will install automatically on first launch.
-
-4. **Verify setup:**
-   ```vim
-   :checkhealth
-   ```
+**Installation:** Use this repository instead of standard kickstart.nvim. See [INSTALL.md](INSTALL.md) for configuration-specific setup.
 
 ## ⌨️ **Key Bindings**
 
@@ -201,37 +168,11 @@ require('custom.transparency').setup({
 
 ### Common Issues
 
-**Plugins not loading?**
-```vim
-:Lazy sync
-:checkhealth lazy
-```
-
-**LSP not working?**
-```vim
-:Mason
-:checkhealth mason
-:LspInfo
-```
-
-**Icons not showing?**
-- Install a Nerd Font
-- Verify `vim.g.have_nerd_font = true` in init.lua
-
 **Transparency not working?**
-- Check terminal true color support
+- Check terminal true color support  
 - For tmux users: see [INSTALL.md](INSTALL.md) tmux configuration
 
-### Health Checks
-
-The configuration includes comprehensive health checks:
-
-```vim
-:checkhealth          " Overall system health
-:checkhealth kickstart " Kickstart-specific checks
-:checkhealth mason     " LSP server status
-:checkhealth telescope " Search functionality
-```
+**For other issues**, see [README.md](README.md) troubleshooting and run `:checkhealth`.
 
 ## 🏗️ **Architecture Philosophy**
 
