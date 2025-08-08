@@ -91,7 +91,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true -- Enable nerd fonts for icons
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
@@ -102,7 +102,7 @@ vim.g.have_nerd_font = false
 vim.o.number = true
 -- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
--- vim.o.relativenumber = true
+vim.o.relativenumber = true -- Personal preference: enable relative line numbers
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.o.mouse = 'a'
@@ -166,12 +166,51 @@ vim.o.scrolloff = 10
 -- See `:help 'confirm'`
 vim.o.confirm = true
 
+-- [[ Personal Settings Migration ]]
+-- Additional personal preferences from custom config
+
+-- Cursor configuration
+vim.opt.guicursor = ""
+
+-- Tab and indentation settings (personal preferences)
+vim.opt.tabstop = 8
+vim.opt.shiftwidth = 4
+vim.opt.softtabstop = 4
+vim.opt.expandtab = true
+vim.opt.smartindent = true
+
+-- Text wrapping
+vim.opt.wrap = false
+
+-- File handling preferences
+vim.opt.swapfile = false
+vim.opt.backup = false
+vim.opt.undodir = os.getenv("HOME") .. "/.cache/nvim/undodir"
+
+-- Search configuration
+vim.opt.hlsearch = false
+vim.opt.incsearch = true
+
+-- Visual preferences
+vim.opt.termguicolors = true
+vim.opt.colorcolumn = "80"
+vim.opt.isfname:append("@-@")
+
+-- [[ Transparency Setup ]]
+require('custom.transparency').setup({
+  default_transparent = true
+})
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+
+-- [[ Personal Keymaps Migration ]]
+-- Custom keymaps from personal configuration
+vim.keymap.set("n", "<C-s>", vim.cmd.write, { desc = "Save file" })
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
