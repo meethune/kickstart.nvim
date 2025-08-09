@@ -170,7 +170,7 @@ vim.o.confirm = true
 -- Additional personal preferences from custom config
 
 -- Cursor configuration
-vim.opt.guicursor = ""
+vim.opt.guicursor = ''
 
 -- Tab and indentation settings (personal preferences)
 vim.opt.tabstop = 8
@@ -185,7 +185,7 @@ vim.opt.wrap = false
 -- File handling preferences
 vim.opt.swapfile = false
 vim.opt.backup = false
-vim.opt.undodir = os.getenv("HOME") .. "/.cache/nvim/undodir"
+vim.opt.undodir = os.getenv 'HOME' .. '/.cache/nvim/undodir'
 
 -- Search configuration
 vim.opt.hlsearch = false
@@ -193,13 +193,13 @@ vim.opt.incsearch = true
 
 -- Visual preferences
 vim.opt.termguicolors = true
-vim.opt.colorcolumn = "80"
-vim.opt.isfname:append("@-@")
+vim.opt.colorcolumn = '80'
+vim.opt.isfname:append '@-@'
 
 -- [[ Transparency Setup ]]
-require('custom.transparency').setup({
-  default_transparent = true
-})
+require('custom.transparency').setup {
+  default_transparent = true,
+}
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
@@ -210,7 +210,7 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- [[ Personal Keymaps Migration ]]
 -- Custom keymaps from personal configuration
-vim.keymap.set("n", "<C-s>", vim.cmd.write, { desc = "Save file" })
+vim.keymap.set('n', '<C-s>', vim.cmd.write, { desc = 'Save file' })
 
 -- Load custom keymaps module (with error handling for development)
 pcall(function()
@@ -265,19 +265,19 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 -- [[ File Template Autocmd ]]
 -- Create autocmd for file templates using external templates module
-local templates = require('templates')
+local templates = require 'templates'
 
 vim.api.nvim_create_autocmd('BufNewFile', {
   pattern = templates.get_autocmd_patterns(),
   callback = function(args)
-    local filename = vim.fn.expand('%:p')
-    local ext = vim.fn.expand('%:e')
-    
+    local filename = vim.fn.expand '%:p'
+    local ext = vim.fn.expand '%:e'
+
     -- Only insert template for truly new files
     if vim.fn.filereadable(filename) == 1 then
       return
     end
-    
+
     vim.defer_fn(function()
       templates.insert_template(ext)
     end, 100)
@@ -813,7 +813,7 @@ require('lazy').setup({
         },
         config = function()
           -- Load custom snippets for file templates
-          require('luasnip.loaders.from_lua').load({paths = "./lua/snippets"})
+          require('luasnip.loaders.from_lua').load { paths = './lua/snippets' }
         end,
       },
       'folke/lazydev.nvim',

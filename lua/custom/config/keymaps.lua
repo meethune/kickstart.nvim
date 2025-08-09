@@ -15,19 +15,19 @@ M.lsp_keymaps = function(bufnr)
   return {
     -- Diagnostic keymaps
     { 'n', '<leader>pm', vim.diagnostic.open_float, 'Open Diagnostic Float' },
-    
+
     -- LSP navigation keymaps using telescope for better UX
     { 'n', 'gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition' },
     { 'n', 'gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences' },
     { 'n', 'gi', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation' },
     { 'n', 'gt', require('telescope.builtin').lsp_type_definitions, '[G]oto [T]ype Definition' },
     { 'n', 'gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration' },
-    
+
     -- LSP actions
     { 'n', 'K', vim.lsp.buf.hover, 'Hover Documentation' },
     { 'n', '<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame Symbol' },
     { 'n', '<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction' },
-    
+
     -- Document/Workspace symbols
     { 'n', '<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols' },
     { 'n', '<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols' },
@@ -39,10 +39,10 @@ function M.setup_lsp_keymaps(bufnr)
   local keymaps = M.lsp_keymaps()
   for _, keymap in ipairs(keymaps) do
     local mode, lhs, rhs, desc = keymap[1], keymap[2], keymap[3], keymap[4]
-    vim.keymap.set(mode, lhs, rhs, { 
-      buffer = bufnr, 
-      silent = true, 
-      desc = desc 
+    vim.keymap.set(mode, lhs, rhs, {
+      buffer = bufnr,
+      silent = true,
+      desc = desc,
     })
   end
 end
@@ -65,9 +65,9 @@ function M.setup_general_keymaps()
   local keymaps = M.general_keymaps()
   for _, keymap in ipairs(keymaps) do
     local mode, lhs, rhs, desc = keymap[1], keymap[2], keymap[3], keymap[4]
-    vim.keymap.set(mode, lhs, rhs, { 
-      silent = true, 
-      desc = desc 
+    vim.keymap.set(mode, lhs, rhs, {
+      silent = true,
+      desc = desc,
     })
   end
 end

@@ -2,7 +2,7 @@
 return {
   'nvim-telescope/telescope.nvim',
   branch = '0.1.x',
-  dependencies = { 
+  dependencies = {
     'nvim-lua/plenary.nvim',
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
     'nvim-telescope/telescope-ui-select.nvim',
@@ -10,9 +10,13 @@ return {
   keys = {
     { '<leader>pf', '<cmd>Telescope find_files<cr>', desc = 'Find Files' },
     { '<C-p>', '<cmd>Telescope git_files<cr>', desc = 'Git Files' },
-    { '<leader>ps', function()
-      require('telescope.builtin').grep_string({ search = vim.fn.input("Grep > ") })
-    end, desc = 'Grep String' },
+    {
+      '<leader>ps',
+      function()
+        require('telescope.builtin').grep_string { search = vim.fn.input 'Grep > ' }
+      end,
+      desc = 'Grep String',
+    },
     -- Enhanced search capabilities
     { '<leader>fw', '<cmd>Telescope live_grep<cr>', desc = 'Live Grep' },
     { '<leader>fb', '<cmd>Telescope buffers<cr>', desc = 'Find Buffers' },
@@ -20,13 +24,13 @@ return {
     { '<leader>fr', '<cmd>Telescope oldfiles<cr>', desc = 'Recent Files' },
   },
   config = function()
-    require('telescope').setup({
+    require('telescope').setup {
       defaults = {
-        file_ignore_patterns = { "node_modules", ".git/", "target/" },
+        file_ignore_patterns = { 'node_modules', '.git/', 'target/' },
         layout_strategy = 'horizontal',
         layout_config = {
           horizontal = {
-            prompt_position = "top",
+            prompt_position = 'top',
             preview_width = 0.55,
             results_width = 0.8,
           },
@@ -37,14 +41,14 @@ return {
           height = 0.80,
           preview_cutoff = 120,
         },
-        sorting_strategy = "ascending",
+        sorting_strategy = 'ascending',
       },
       extensions = {
         ['ui-select'] = {
           require('telescope.themes').get_dropdown(),
         },
       },
-    })
+    }
 
     -- Enable Telescope extensions if they are installed
     pcall(require('telescope').load_extension, 'fzf')
@@ -52,7 +56,7 @@ return {
 
     -- Consolidated Telescope keybindings (avoiding conflicts with lazy keys)
     local builtin = require 'telescope.builtin'
-    
+
     -- Core search functions
     vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
     vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })

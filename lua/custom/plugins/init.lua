@@ -1,7 +1,7 @@
 -- Enhanced modular plugin configuration loader
 -- Uses the improved plugin loader utility
 
-local plugin_loader = require('custom.utils.plugin-loader')
+local plugin_loader = require 'custom.utils.plugin-loader'
 
 -- Load all plugins using the enhanced loader
 local all_plugins = plugin_loader.load_all()

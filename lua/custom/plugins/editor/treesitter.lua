@@ -6,9 +6,22 @@ return {
     'nvim-treesitter/nvim-treesitter-textobjects', -- Enhanced text objects
   },
   opts = {
-    ensure_installed = { 
-      'javascript', 'python', 'c', 'lua', 'vim', 'vimdoc', 'query', 'rust',
-      'bash', 'json', 'yaml', 'toml', 'markdown', 'html', 'css' -- Extended language support
+    ensure_installed = {
+      'javascript',
+      'python',
+      'c',
+      'lua',
+      'vim',
+      'vimdoc',
+      'query',
+      'rust',
+      'bash',
+      'json',
+      'yaml',
+      'toml',
+      'markdown',
+      'html',
+      'css', -- Extended language support
     },
     sync_install = false,
     auto_install = true,
