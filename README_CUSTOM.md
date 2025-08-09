@@ -26,6 +26,7 @@
 ### 🔧 **Enhanced Productivity**
 - **Code formatting** with conform.nvim
 - **Auto-pairs** with TreeSitter integration
+- **File explorer** with nvim-tree (sidebar navigation)
 - **Undo history** visualization with undotree
 - **Automatic file templates** for Python, Shell, and Lua scripts
 - **TODO highlighting** and project-wide search
@@ -35,8 +36,11 @@
 ```
 kickstart.nvim/
 ├── init.lua                          # Main configuration entry point
-├── KEYBINDINGS.md                   # Complete keybinding reference
-├── MIGRATION.md                     # Keybinding migration guide
+├── doc/                              # Documentation
+│   ├── KEYBINDINGS.md               # Complete keybinding reference
+│   ├── MIGRATION.md                 # Keybinding migration guide
+│   ├── PLUGINS.md                   # Comprehensive plugin documentation
+│   └── kickstart.txt                # Original kickstart help
 ├── lua/
 │   ├── templates.lua                # File template definitions & logic
 │   ├── custom/                      # Custom configuration modules
@@ -83,8 +87,9 @@ kickstart.nvim/
 
 > **Note:** All keybindings have been consolidated to eliminate conflicts. LSP and Telescope bindings are now managed in dedicated modules for consistency.
 
-📋 **[Complete Keybinding Reference →](KEYBINDINGS.md)**  
-🔄 **[Migration Guide →](MIGRATION.md)** (if upgrading from previous version)
+📋 **[Complete Keybinding Reference →](doc/KEYBINDINGS.md)**  
+🔄 **[Migration Guide →](doc/MIGRATION.md)** (if upgrading from previous version)  
+🔌 **[Plugin Documentation →](doc/PLUGINS.md)** (comprehensive plugin guide)
 
 ### Core Navigation
 | Key | Action | Description |
@@ -257,6 +262,11 @@ require('custom.transparency').setup({
 **Transparency not working?**
 - Check terminal true color support  
 - For tmux users: see [INSTALL.md](INSTALL.md) tmux configuration
+
+**Custom plugins not loading (nvim-tree, bufferline, etc.)?**
+- Ensure `{ import = 'custom.plugins' }` is uncommented in `init.lua`
+- Check `:Lazy` to verify plugin installation status
+- Remove duplicate plugin definitions that might conflict
 
 **For other issues**, see [README.md](README.md) troubleshooting and run `:checkhealth`.
 

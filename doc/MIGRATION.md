@@ -89,6 +89,14 @@ If you've modified keybindings in `init.lua`, consider moving them to the approp
    - Telescope-related → `lua/custom/plugins/editor/telescope.lua`
    - General → Add to `init.lua` or create new module
 
+### "Custom plugins not loading (nvim-tree, etc.)"
+1. **Check custom plugin import** is enabled in `init.lua:993`:
+   ```lua
+   { import = 'custom.plugins' },  -- Should NOT be commented out
+   ```
+2. **Verify with `:Lazy`** to see plugin installation status
+3. **Remove duplicate plugins** that might conflict with existing definitions
+
 ### "I can't find a keybinding"
 1. **Use discovery**: Press `<leader>sk` to search all keybindings
 2. **Check legacy support**: Many old keys still work under different names
@@ -118,7 +126,7 @@ This is expected! LSP navigation now uses Telescope for:
 ## 📚 Additional Resources
 
 - **[KEYBINDINGS.md](KEYBINDINGS.md)** → Complete keybinding reference
-- **[README_CUSTOM.md](README_CUSTOM.md)** → Updated configuration overview
+- **[README_CUSTOM.md](../README_CUSTOM.md)** → Updated configuration overview
 - **`:help key-notation`** → Neovim key syntax help
 - **`<leader>sk`** → Interactive keybinding search
 

@@ -95,6 +95,7 @@
 |-----|--------|-------------|
 | `<C-n>` | Toggle Tree | Toggle file explorer visibility |
 | `<leader>e` | Focus Tree | Focus file explorer window |
+| `<leader>ef` | Find File | Find current file in tree |
 
 ### Transparency Management
 | Command | Action | Description |
